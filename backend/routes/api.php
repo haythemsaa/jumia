@@ -9,6 +9,9 @@ use App\Http\Controllers\Api\CartController;
 use App\Http\Controllers\Api\ReviewController;
 use App\Http\Controllers\Api\ReturnController;
 use App\Http\Controllers\Api\PaymentController;
+use App\Http\Controllers\Api\InvoiceController;
+use App\Http\Controllers\Api\ComparisonController;
+use App\Http\Controllers\Api\ChatController;
 use Illuminate\Support\Facades\Route;
 
 // Public routes
@@ -78,6 +81,30 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/payment/initiate', [PaymentController::class, 'initiate']);
     Route::post('/payment/verify', [PaymentController::class, 'verifyPayment']);
     Route::get('/payment/history', [PaymentController::class, 'paymentHistory']);
+
+    // Invoices
+    Route::get('/invoices/{order}/download', [InvoiceController::class, 'download'])->name('invoice.download');
+    Route::get('/invoices/{order}/view', [InvoiceController::class, 'view'])->name('invoice.view');
+    Route::post('/invoices/{order}/email', [InvoiceController::class, 'email']);
+    Route::get('/invoices/{order}/url', [InvoiceController::class, 'getUrl']);
+
+    // Product Comparison
+    Route::get('/comparison', [ComparisonController::class, 'index']);
+    Route::post('/comparison/add', [ComparisonController::class, 'add']);
+    Route::delete('/comparison/remove/{productId}', [ComparisonController::class, 'remove']);
+    Route::delete('/comparison/clear', [ComparisonController::class, 'clear']);
+    Route::get('/comparison/compare', [ComparisonController::class, 'compare']);
+    Route::get('/comparison/check/{productId}', [ComparisonController::class, 'check']);
+
+    // Chat
+    Route::get('/chat/conversations', [ChatController::class, 'index']);
+    Route::post('/chat/conversations', [ChatController::class, 'getOrCreate']);
+    Route::get('/chat/conversations/{id}', [ChatController::class, 'show']);
+    Route::post('/chat/conversations/{id}/messages', [ChatController::class, 'sendMessage']);
+    Route::put('/chat/conversations/{id}/read', [ChatController::class, 'markAsRead']);
+    Route::put('/chat/conversations/{id}/close', [ChatController::class, 'close']);
+    Route::get('/chat/unread', [ChatController::class, 'unreadCount']);
+    Route::delete('/chat/messages/{id}', [ChatController::class, 'deleteMessage']);
 
     // Vendor routes
     Route::prefix('vendor')->middleware('vendor')->group(function () {
