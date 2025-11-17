@@ -12,6 +12,8 @@ use App\Http\Controllers\Api\PaymentController;
 use App\Http\Controllers\Api\InvoiceController;
 use App\Http\Controllers\Api\ComparisonController;
 use App\Http\Controllers\Api\ChatController;
+use App\Http\Controllers\Api\LoyaltyController;
+use App\Http\Controllers\Api\FlashSaleController;
 use Illuminate\Support\Facades\Route;
 
 // Public routes
@@ -40,6 +42,14 @@ Route::post('/payment/webhook/edinar', [PaymentController::class, 'edinarWebhook
 Route::post('/payment/webhook/konnect', [PaymentController::class, 'konnectWebhook'])->name('payment.webhook.konnect');
 Route::get('/payment/success/{order}', [PaymentController::class, 'paymentSuccess'])->name('payment.success');
 Route::get('/payment/fail/{order}', [PaymentController::class, 'paymentFailed'])->name('payment.fail');
+
+// Flash Sales - Public
+Route::get('/flash-sales', [FlashSaleController::class, 'index']);
+Route::get('/flash-sales/upcoming', [FlashSaleController::class, 'upcoming']);
+Route::get('/flash-sales/{id}', [FlashSaleController::class, 'show']);
+
+// Loyalty Tiers - Public
+Route::get('/loyalty/tiers', [LoyaltyController::class, 'tiers']);
 
 // Protected routes
 Route::middleware('auth:sanctum')->group(function () {
@@ -105,6 +115,17 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('/chat/conversations/{id}/close', [ChatController::class, 'close']);
     Route::get('/chat/unread', [ChatController::class, 'unreadCount']);
     Route::delete('/chat/messages/{id}', [ChatController::class, 'deleteMessage']);
+
+    // Loyalty Program
+    Route::get('/loyalty/dashboard', [LoyaltyController::class, 'dashboard']);
+    Route::get('/loyalty/history', [LoyaltyController::class, 'history']);
+    Route::get('/loyalty/missions', [LoyaltyController::class, 'missions']);
+    Route::post('/loyalty/referral/apply', [LoyaltyController::class, 'applyReferralCode']);
+    Route::get('/loyalty/referral/stats', [LoyaltyController::class, 'referralStats']);
+    Route::post('/loyalty/redeem', [LoyaltyController::class, 'redeemPoints']);
+
+    // Flash Sales
+    Route::post('/flash-sales/{flashSaleProductId}/check', [FlashSaleController::class, 'checkEligibility']);
 
     // Vendor routes
     Route::prefix('vendor')->middleware('vendor')->group(function () {

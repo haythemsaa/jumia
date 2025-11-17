@@ -87,6 +87,26 @@ class User extends Authenticatable
         return $this->hasMany(ReturnRequest::class);
     }
 
+    public function loyaltyTier()
+    {
+        return $this->belongsTo(LoyaltyTier::class);
+    }
+
+    public function userMissions()
+    {
+        return $this->hasMany(UserMission::class);
+    }
+
+    public function referrals()
+    {
+        return $this->hasMany(Referral::class, 'referrer_id');
+    }
+
+    public function referredBy()
+    {
+        return $this->hasOne(Referral::class, 'referred_id');
+    }
+
     // Helper methods
     public function isAdmin()
     {
@@ -111,5 +131,63 @@ class User extends Authenticatable
             $this->loyaltyPoints()
             ->where('type', 'redeemed')
             ->sum('points');
+    }
+
+    public function addLoyaltyPoints(int $points, string $description = 'Points earned'): void
+    {
+        LoyaltyPoint::create([
+            'user_id' => $this->id,
+            'points' => $points,
+            'type' => 'earned',
+            'description' => $description,
+        ]);
+
+        $this->increment('loyalty_points', $points);
+        $this->updateLoyaltyTier();
+    }
+
+    public function deductLoyaltyPoints(int $points, string $description = 'Points redeemed'): bool
+    {
+        if ($this->loyalty_points < $points) {
+            return false;
+        }
+
+        LoyaltyPoint::create([
+            'user_id' => $this->id,
+            'points' => $points,
+            'type' => 'redeemed',
+            'description' => $description,
+        ]);
+
+        $this->decrement('loyalty_points', $points);
+        $this->updateLoyaltyTier();
+
+        return true;
+    }
+
+    public function updateLoyaltyTier(): void
+    {
+        $tier = LoyaltyTier::getTierByPoints($this->loyalty_points);
+
+        if ($tier && $this->loyalty_tier_id !== $tier->id) {
+            $this->update(['loyalty_tier_id' => $tier->id]);
+        }
+    }
+
+    public function generateReferralCode(): string
+    {
+        if ($this->referral_code) {
+            return $this->referral_code;
+        }
+
+        $code = strtoupper(substr($this->name, 0, 3) . rand(1000, 9999));
+
+        while (self::where('referral_code', $code)->exists()) {
+            $code = strtoupper(substr($this->name, 0, 3) . rand(1000, 9999));
+        }
+
+        $this->update(['referral_code' => $code]);
+
+        return $code;
     }
 }
