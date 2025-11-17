@@ -2,9 +2,24 @@
 
 Plateforme e-commerce multi-vendeurs complète pour la Tunisie, construite avec Laravel 11, Next.js 14 et Flutter 3.
 
+> ⚠️ **Statut Actuel:** MVP Fonctionnel - En développement actif
+>
+> 📊 **[Analyse Compétitive & Roadmap](COMPETITIVE_ANALYSIS.md)** | 🔧 **[Guide d'Implémentation](IMPLEMENTATION_GUIDE.md)** | ✅ **[TODO Technique](TODO.md)**
+
 ## 🚀 Vue d'ensemble
 
 ICHRI Tunisia est un marketplace complet permettant aux vendeurs de vendre leurs produits et aux clients d'acheter en ligne avec livraison en Tunisie.
+
+### 🎯 Vision & Positionnement
+
+**Objectif:** Devenir la plateforme e-commerce leader en Tunisie avec une expérience utilisateur supérieure à la concurrence.
+
+**Différenciation:**
+- 🇹🇳 **100% Tunisien** - Adapté au marché local
+- 💰 **Commission compétitive** - 12% (vs 15-20% concurrents)
+- ⚡ **Onboarding rapide** - Vendeurs approuvés en 24h
+- 🛡️ **Transparence totale** - Pas de frais cachés
+- 📱 **Multi-plateforme** - Web + iOS + Android
 
 ### Technologies
 
@@ -212,20 +227,118 @@ Voir la documentation complète dans `/backend/README.md`
 
 ## 💳 Paiement
 
-- Paiement à la livraison
-- Carte bancaire
-- Virement bancaire
+**Actuellement (MVP):**
+- ⚠️ Paiement à la livraison
+- ⚠️ Carte bancaire (manuel)
+- ⚠️ Virement bancaire (manuel)
 
-## 📈 Améliorations futures
+**En développement (Sprint 1):**
+- 🚧 E-Dinar (Monétique Tunisie)
+- 🚧 Konnect Payment
+- 🚧 D17 Payment
+- 🚧 Split payment automatique
 
-- [ ] Paiement en ligne intégré
-- [ ] Chat en temps réel
-- [ ] Notifications push
-- [ ] Analytics avancés
-- [ ] Intelligence artificielle (recommandations)
-- [ ] Multi-langue (Arabe, Français, Anglais)
+## 📈 Roadmap & Développement
+
+### 🔴 Sprint 1 (Semaine 1-2) - **CRITIQUE**
+**Fonctionnalités bloquantes pour mise en production**
+- [ ] Intégration paiement en ligne (E-Dinar, Konnect, D17)
+- [ ] Système de notifications (Push + Email + SMS)
+- [ ] Système d'avis et reviews complet avec photos
+- [ ] Retours et remboursements
+- [ ] Factures PDF automatiques
+- [ ] Monitoring et logs (Sentry)
+- [ ] Backups automatiques quotidiens
+- [ ] CI/CD avec GitHub Actions
+
+**Impact:** Ces fonctionnalités sont **essentielles** pour être compétitif. Sans elles, la plateforme ne peut pas rivaliser avec Jumia ou Amazon.
+
+### 🟡 Sprint 2 (Semaine 3-4) - **IMPORTANT**
+**Amélioration expérience utilisateur**
+- [ ] Chat en temps réel (client-vendeur-support)
+- [ ] Suivi de livraison en temps réel avec GPS
+- [ ] Recherche avancée (Elasticsearch/Meilisearch)
+- [ ] Comparateur de produits
+- [ ] OAuth social login (Google, Facebook, Apple)
+- [ ] Optimisation images et CDN
+
+**Impact:** Augmente significativement la satisfaction client et les conversions.
+
+### 🟢 Sprint 3 (Semaine 5-6) - **CROISSANCE**
+**Engagement et rétention**
+- [ ] Programme fidélité avancé avec niveaux (Bronze→Platinum)
+- [ ] Flash sales et deals du jour
+- [ ] Recommandations personnalisées (Machine Learning)
+- [ ] Email marketing automatisé
+- [ ] Programme d'affiliation
+- [ ] Dashboard analytics avancé pour vendeurs
+
+**Impact:** Augmente la valeur vie client (LTV) et le taux de rétention.
+
+### 🔵 Sprint 4 (Semaine 7-8) - **OPTIMISATION**
+**Performance et scalabilité**
+- [ ] Multi-devises (EUR, USD, TND)
+- [ ] Multi-langues (Arabe RTL, Français, Anglais)
 - [ ] PWA (Progressive Web App)
-- [ ] Tests automatisés
+- [ ] SEO avancé et sitemap
+- [ ] Tests automatisés (Coverage >80%)
+- [ ] A/B Testing
+
+**Impact:** Expansion internationale et optimisation conversions.
+
+### 🚀 Phase Innovation (Mois 3+)
+**Différenciation concurrentielle**
+- [ ] Recherche par image (Visual Search)
+- [ ] Recherche vocale
+- [ ] AR pour essayage virtuel
+- [ ] Live Shopping / Streaming
+- [ ] Abonnement ICHRI Prime (livraison gratuite illimitée)
+- [ ] Blockchain pour traçabilité
+- [ ] Intelligence artificielle avancée
+
+**Impact:** Innovation et leadership technologique.
+
+---
+
+## 📊 Gap Analysis vs Concurrents
+
+| Fonctionnalité | ICHRI (Actuel) | Jumia | Amazon | Priorité |
+|---|:---:|:---:|:---:|---|
+| Paiement en ligne | ⚠️ Manuel | ✅ | ✅ | 🔴 CRITIQUE |
+| Notifications temps réel | ❌ | ✅ | ✅ | 🔴 CRITIQUE |
+| Avis avec photos | ❌ | ✅ | ✅ | 🔴 CRITIQUE |
+| Retours en ligne | ❌ | ✅ | ✅ | 🔴 CRITIQUE |
+| Chat support | ❌ | ✅ | ✅ | 🟡 Important |
+| Tracking GPS | ❌ | ✅ | ✅ | 🟡 Important |
+| Recherche avancée | ⚠️ Basique | ✅ | ✅ | 🟡 Important |
+| Programme fidélité | ⚠️ Basique | ✅ | ✅ | 🟢 Moyen |
+| Multi-langues | ❌ | ✅ | ✅ | 🟢 Moyen |
+| Flash Sales | ❌ | ✅ | ✅ | 🟢 Moyen |
+
+**Diagnostic:**
+- ✅ **Forces:** Architecture solide, commission compétitive, focus local
+- ⚠️ **Faiblesses:** Manque fonctionnalités critiques de confiance
+- 🎯 **Objectif:** Atteindre 80% des fonctionnalités de Jumia en 2 mois
+
+➡️ **Voir [Analyse Compétitive Complète](COMPETITIVE_ANALYSIS.md) pour détails**
+
+---
+
+## 💰 Investment & Resources
+
+**Budget estimé Phase 1-2 (2 mois):**
+- Développement: 28,000 TND
+- Infrastructure & Services: 2,600 TND
+- **Total:** ~30,600 TND
+
+**Retour sur investissement attendu:**
+- Augmentation conversions: +40%
+- Réduction abandon panier: -30%
+- Augmentation panier moyen: +25%
+- Amélioration NPS: +35 points
+
+➡️ **Voir [Guide d'Implémentation](IMPLEMENTATION_GUIDE.md) pour détails techniques**
+➡️ **Voir [TODO Technique](TODO.md) pour tâches détaillées**
 
 ## 📄 Documentation
 
