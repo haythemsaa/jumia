@@ -1,6 +1,6 @@
-# JUMIA Tunisia - Frontend
+# ICHRI Tunisia - Frontend
 
-Frontend Next.js 14 pour la plateforme e-commerce multi-vendeurs JUMIA Tunisia.
+Frontend Next.js 14 pour la plateforme e-commerce multi-vendeurs ICHRI Tunisia.
 
 ## 🚀 Technologies
 
@@ -69,4 +69,4 @@ npm run lint    # Linter
 
 ## 📄 License
 
-MIT License - JUMIA Tunisia
+MIT License - ICHRI Tunisia

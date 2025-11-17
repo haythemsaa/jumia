@@ -7,7 +7,7 @@ import { Toaster } from "react-hot-toast";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "JUMIA Tunisia - Marketplace E-commerce",
+  title: "ICHRI Tunisia - Marketplace E-commerce",
   description: "Plateforme e-commerce multi-vendeurs pour la Tunisie",
 };
 

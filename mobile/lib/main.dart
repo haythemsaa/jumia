@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => ProductsProvider()),
       ],
       child: MaterialApp(
-        title: 'JUMIA Tunisia',
+        title: 'ICHRI Tunisia',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           primarySwatch: Colors.orange,

@@ -37,7 +37,7 @@ export default function Header() {
         <div className="flex items-center justify-between py-4">
           {/* Logo */}
           <Link href="/" className="text-3xl font-bold text-orange-500">
-            JUMIA
+            ICHRI
           </Link>
 
           {/* Search Bar */}

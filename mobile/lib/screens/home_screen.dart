@@ -24,7 +24,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('JUMIA'),
+        title: const Text('ICHRI'),
         actions: [
           IconButton(
             icon: const Icon(Icons.search),
@@ -59,7 +59,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        'Bienvenue sur JUMIA',
+                        'Bienvenue sur ICHRI',
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 28,

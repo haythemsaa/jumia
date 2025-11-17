@@ -1,6 +1,6 @@
-# JUMIA Tunisia - Application Mobile
+# ICHRI Tunisia - Application Mobile
 
-Application mobile Flutter pour la plateforme e-commerce multi-vendeurs JUMIA Tunisia.
+Application mobile Flutter pour la plateforme e-commerce multi-vendeurs ICHRI Tunisia.
 
 ## 🚀 Technologies
 
@@ -129,7 +129,7 @@ flutter build ios --release
 
 ## 🎨 Theme
 
-L'application utilise la couleur principale orange de JUMIA:
+L'application utilise la couleur principale orange de ICHRI:
 - Couleur primaire: `#FF9900`
 - Couleur secondaire: `#FF7700`
 
@@ -145,10 +145,10 @@ flutter test integration_test
 
 ## 📄 License
 
-MIT License - JUMIA Tunisia
+MIT License - ICHRI Tunisia
 
 ## 👥 Support
 
 Pour toute question ou problème:
-- Email: support@jumia.tn
-- GitHub: https://github.com/haythemsaa/jumia
+- Email: support@ichri.tn
+- GitHub: https://github.com/haythemsaa/ichri

@@ -8,7 +8,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* About */}
           <div>
-            <h3 className="text-xl font-bold text-orange-500 mb-4">JUMIA</h3>
+            <h3 className="text-xl font-bold text-orange-500 mb-4">ICHRI</h3>
             <p className="text-gray-400 text-sm">
               La plateforme e-commerce n°1 en Tunisie. Trouvez tout ce dont vous avez besoin avec des millions de produits.
             </p>
@@ -93,14 +93,14 @@ export default function Footer() {
               </li>
               <li className="flex items-center space-x-2">
                 <FiMail className="flex-shrink-0" />
-                <span>support@jumia.tn</span>
+                <span>support@ichri.tn</span>
               </li>
             </ul>
           </div>
         </div>
 
         <div className="border-t border-gray-800 mt-8 pt-8 text-center text-sm text-gray-400">
-          <p>&copy; {new Date().getFullYear()} JUMIA Tunisia. Tous droits réservés.</p>
+          <p>&copy; {new Date().getFullYear()} ICHRI Tunisia. Tous droits réservés.</p>
         </div>
       </div>
     </footer>

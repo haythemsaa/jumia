@@ -1,10 +1,10 @@
-# JUMIA Tunisia - Marketplace E-commerce
+# ICHRI Tunisia - Marketplace E-commerce
 
 Plateforme e-commerce multi-vendeurs complète pour la Tunisie, construite avec Laravel 11, Next.js 14 et Flutter 3.
 
 ## 🚀 Vue d'ensemble
 
-JUMIA Tunisia est un marketplace complet permettant aux vendeurs de vendre leurs produits et aux clients d'acheter en ligne avec livraison en Tunisie.
+ICHRI Tunisia est un marketplace complet permettant aux vendeurs de vendre leurs produits et aux clients d'acheter en ligne avec livraison en Tunisie.
 
 ### Technologies
 
@@ -28,7 +28,7 @@ JUMIA Tunisia est un marketplace complet permettant aux vendeurs de vendre leurs
 ## 📁 Structure du projet
 
 ```
-jumia/
+ichri/
 ├── backend/              # API Laravel 11
 │   ├── app/
 │   ├── database/
@@ -193,7 +193,7 @@ Voir la documentation complète dans `/backend/README.md`
 ## 🎨 Design
 
 ### Couleurs principales
-- Orange JUMIA: `#FF9900`
+- Orange ICHRI: `#FF9900`
 - Orange foncé: `#FF7700`
 - Gris: `#363636`
 
@@ -245,12 +245,12 @@ Les contributions sont les bienvenues! Veuillez:
 
 ## 📝 License
 
-MIT License - JUMIA Tunisia
+MIT License - ICHRI Tunisia
 
 ## 👥 Contact
 
-- Email: support@jumia.tn
-- GitHub: https://github.com/haythemsaa/jumia
+- Email: support@ichri.tn
+- GitHub: https://github.com/haythemsaa/ichri
 
 ---
 

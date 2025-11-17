@@ -1,6 +1,6 @@
-# Jumia Tunisia - E-Commerce Marketplace Backend
+# Ichri Tunisia - E-Commerce Marketplace Backend
 
-Backend API Laravel 11 complet pour une plateforme e-commerce marketplace type Jumia, adaptée au marché tunisien.
+Backend API Laravel 11 complet pour une plateforme e-commerce marketplace type Ichri, adaptée au marché tunisien.
 
 ## Stack Technique
 
@@ -25,7 +25,7 @@ php artisan key:generate
 
 # Configurer la base de données dans .env
 DB_CONNECTION=mysql
-DB_DATABASE=jumia_tunisia
+DB_DATABASE=ichri_tunisia
 DB_USERNAME=root
 DB_PASSWORD=
 
@@ -171,7 +171,7 @@ php artisan db:seed
 - `ShippingMethodSeeder` - 4 méthodes de livraison tunisiennes
   - Standard, Express, Poste Tunisienne, Aramex
 - `DatabaseSeeder` - Utilisateurs de test
-  - Admin: admin@jumia.tn
+  - Admin: admin@ichri.tn
   - Client: client@example.com
   - Vendeur: vendor@example.com (avec boutique approuvée)
 
@@ -321,7 +321,7 @@ curl -X GET http://localhost:8000/api/user \
 ## Support
 
 Pour toute question ou problème:
-- Email: admin@jumia.tn
+- Email: admin@ichri.tn
 - GitHub Issues
 
 ---
