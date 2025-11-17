@@ -148,4 +148,42 @@ class Product extends Model
     {
         $this->increment('views');
     }
+
+    public function updateRating()
+    {
+        $reviews = $this->reviews()->approved()->get();
+
+        if ($reviews->count() > 0) {
+            $averageRating = $reviews->avg('rating');
+            $this->update([
+                'rating' => round($averageRating, 2),
+                'total_reviews' => $reviews->count(),
+            ]);
+        }
+    }
+
+    public function decrementStock($quantity)
+    {
+        if ($this->stock_quantity >= $quantity) {
+            $this->decrement('stock_quantity', $quantity);
+
+            // Update stock status if out of stock
+            if ($this->stock_quantity == 0) {
+                $this->update(['stock_status' => 'out_of_stock']);
+            }
+
+            return true;
+        }
+        return false;
+    }
+
+    public function incrementStock($quantity)
+    {
+        $this->increment('stock_quantity', $quantity);
+
+        // Update stock status if back in stock
+        if ($this->stock_quantity > 0 && $this->stock_status !== 'in_stock') {
+            $this->update(['stock_status' => 'in_stock']);
+        }
+    }
 }
