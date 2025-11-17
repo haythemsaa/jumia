@@ -1,0 +1,298 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "ICHRI Tunisia API Documentation",
+        "description": "API REST complète pour la plateforme e-commerce multi-vendeurs ICHRI Tunisia",
+        "contact": {
+            "email": "contact@ichri.tn"
+        },
+        "license": {
+            "name": "Proprietary",
+            "url": "https://ichri.tn/license"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8000/api",
+            "description": "Local Development Server"
+        },
+        {
+            "url": "https://api.ichri.tn",
+            "description": "Production Server"
+        }
+    ],
+    "paths": {
+        "/register": {
+            "post": {
+                "tags": ["Authentication"],
+                "summary": "Register a new user",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "required": ["name", "email", "password", "phone"],
+                                "properties": {
+                                    "name": {"type": "string", "example": "Ahmed Ben Ali"},
+                                    "email": {"type": "string", "format": "email", "example": "ahmed@example.com"},
+                                    "password": {"type": "string", "format": "password", "example": "password123"},
+                                    "password_confirmation": {"type": "string", "format": "password"},
+                                    "phone": {"type": "string", "example": "+21612345678"}
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "User registered successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "user": {"$ref": "#/components/schemas/User"},
+                                        "token": {"type": "string"}
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/login": {
+            "post": {
+                "tags": ["Authentication"],
+                "summary": "Login user",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "required": ["email", "password"],
+                                "properties": {
+                                    "email": {"type": "string", "format": "email"},
+                                    "password": {"type": "string", "format": "password"}
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Login successful",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "user": {"$ref": "#/components/schemas/User"},
+                                        "token": {"type": "string"}
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Invalid credentials"
+                    }
+                }
+            }
+        },
+        "/products": {
+            "get": {
+                "tags": ["Products"],
+                "summary": "Get all products",
+                "parameters": [
+                    {
+                        "name": "category_id",
+                        "in": "query",
+                        "schema": {"type": "integer"}
+                    },
+                    {
+                        "name": "search",
+                        "in": "query",
+                        "schema": {"type": "string"}
+                    },
+                    {
+                        "name": "min_price",
+                        "in": "query",
+                        "schema": {"type": "number"}
+                    },
+                    {
+                        "name": "max_price",
+                        "in": "query",
+                        "schema": {"type": "number"}
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Products retrieved successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {"$ref": "#/components/schemas/Product"}
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/orders": {
+            "post": {
+                "tags": ["Orders"],
+                "summary": "Create a new order",
+                "security": [{"sanctum": []}],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "required": ["shipping_address", "payment_method"],
+                                "properties": {
+                                    "shipping_address": {"type": "string"},
+                                    "payment_method": {"type": "string", "enum": ["cash", "edinar", "konnect", "d17"]}
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Order created successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {"$ref": "#/components/schemas/Order"}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/loyalty/dashboard": {
+            "get": {
+                "tags": ["Loyalty"],
+                "summary": "Get user loyalty dashboard",
+                "security": [{"sanctum": []}],
+                "responses": {
+                    "200": {
+                        "description": "Loyalty dashboard data",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "points": {"type": "integer"},
+                                        "tier": {"$ref": "#/components/schemas/LoyaltyTier"},
+                                        "next_tier": {"$ref": "#/components/schemas/LoyaltyTier"},
+                                        "points_to_next_tier": {"type": "integer"}
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/flash-sales": {
+            "get": {
+                "tags": ["Flash Sales"],
+                "summary": "Get active flash sales",
+                "responses": {
+                    "200": {
+                        "description": "Active flash sales",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {"$ref": "#/components/schemas/FlashSale"}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "User": {
+                "type": "object",
+                "properties": {
+                    "id": {"type": "integer"},
+                    "name": {"type": "string"},
+                    "email": {"type": "string"},
+                    "phone": {"type": "string"},
+                    "role": {"type": "string", "enum": ["client", "vendor", "admin"]},
+                    "loyalty_points": {"type": "integer"},
+                    "loyalty_tier_id": {"type": "integer"},
+                    "referral_code": {"type": "string"}
+                }
+            },
+            "Product": {
+                "type": "object",
+                "properties": {
+                    "id": {"type": "integer"},
+                    "name": {"type": "string"},
+                    "description": {"type": "string"},
+                    "price": {"type": "number"},
+                    "stock": {"type": "integer"},
+                    "category_id": {"type": "integer"},
+                    "vendor_id": {"type": "integer"},
+                    "status": {"type": "string", "enum": ["active", "inactive", "out_of_stock"]}
+                }
+            },
+            "Order": {
+                "type": "object",
+                "properties": {
+                    "id": {"type": "integer"},
+                    "user_id": {"type": "integer"},
+                    "total": {"type": "number"},
+                    "status": {"type": "string", "enum": ["pending", "confirmed", "shipped", "delivered", "cancelled"]},
+                    "payment_method": {"type": "string"},
+                    "shipping_address": {"type": "string"}
+                }
+            },
+            "LoyaltyTier": {
+                "type": "object",
+                "properties": {
+                    "id": {"type": "integer"},
+                    "name": {"type": "string"},
+                    "slug": {"type": "string"},
+                    "min_points": {"type": "integer"},
+                    "benefits": {"type": "object"}
+                }
+            },
+            "FlashSale": {
+                "type": "object",
+                "properties": {
+                    "id": {"type": "integer"},
+                    "name": {"type": "string"},
+                    "start_time": {"type": "string", "format": "date-time"},
+                    "end_time": {"type": "string", "format": "date-time"},
+                    "status": {"type": "string"},
+                    "eligible_tiers": {"type": "array", "items": {"type": "string"}}
+                }
+            }
+        },
+        "securitySchemes": {
+            "sanctum": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT"
+            }
+        }
+    }
+}
