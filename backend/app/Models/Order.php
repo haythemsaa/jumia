@@ -71,6 +71,16 @@ class Order extends Model
         return $this->hasMany(Payment::class);
     }
 
+    public function paymentTransactions()
+    {
+        return $this->hasMany(PaymentTransaction::class);
+    }
+
+    public function returnRequests()
+    {
+        return $this->hasMany(ReturnRequest::class);
+    }
+
     // Scopes
     public function scopePending($query)
     {
@@ -120,9 +130,19 @@ class Order extends Model
 
     public static function generateOrderNumber()
     {
-        $prefix = 'JM';
+        $prefix = 'IC';
         $timestamp = now()->format('ymd');
         $random = strtoupper(substr(md5(uniqid()), 0, 6));
         return $prefix . $timestamp . $random;
+    }
+
+    public function canBeReturned()
+    {
+        if (!in_array($this->status, ['delivered', 'completed'])) {
+            return false;
+        }
+
+        $returnWindowDays = config('returns.window_days', 14);
+        return $this->delivered_at && $this->delivered_at->diffInDays(now()) <= $returnWindowDays;
     }
 }

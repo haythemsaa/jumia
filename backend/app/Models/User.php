@@ -72,6 +72,21 @@ class User extends Authenticatable
         return $this->hasMany(LoyaltyPoint::class);
     }
 
+    public function notifications()
+    {
+        return $this->hasMany(Notification::class);
+    }
+
+    public function deviceTokens()
+    {
+        return $this->hasMany(DeviceToken::class);
+    }
+
+    public function returnRequests()
+    {
+        return $this->hasMany(ReturnRequest::class);
+    }
+
     // Helper methods
     public function isAdmin()
     {

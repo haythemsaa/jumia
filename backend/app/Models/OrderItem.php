@@ -56,6 +56,11 @@ class OrderItem extends Model
         return $this->belongsTo(Vendor::class);
     }
 
+    public function returnRequests()
+    {
+        return $this->hasMany(ReturnRequest::class);
+    }
+
     // Helper methods
     public function getVendorEarnings()
     {

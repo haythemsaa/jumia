@@ -59,6 +59,11 @@ class Vendor extends Model
         return $this->hasManyThrough(ProductReview::class, Product::class);
     }
 
+    public function reviewResponses()
+    {
+        return $this->hasMany(ReviewResponse::class);
+    }
+
     // Scopes
     public function scopeApproved($query)
     {
