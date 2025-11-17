@@ -18,8 +18,8 @@ class ProductReview extends Model
         'comment',
         'images',
         'is_verified_purchase',
-        'is_approved',
         'helpful_count',
+        'status',
     ];
 
     protected function casts(): array
@@ -28,7 +28,6 @@ class ProductReview extends Model
             'rating' => 'integer',
             'images' => 'array',
             'is_verified_purchase' => 'boolean',
-            'is_approved' => 'boolean',
             'helpful_count' => 'integer',
         ];
     }
@@ -49,10 +48,20 @@ class ProductReview extends Model
         return $this->belongsTo(Order::class);
     }
 
+    public function vendorResponse()
+    {
+        return $this->hasOne(ReviewResponse::class);
+    }
+
     // Scopes
     public function scopeApproved($query)
     {
-        return $query->where('is_approved', true);
+        return $query->where('status', 'approved');
+    }
+
+    public function scopePending($query)
+    {
+        return $query->where('status', 'pending');
     }
 
     public function scopeVerified($query)
@@ -68,14 +77,30 @@ class ProductReview extends Model
     // Helper methods
     public function approve()
     {
-        $this->update(['is_approved' => true]);
+        $this->update(['status' => 'approved']);
 
         // Update product rating
         $this->product->updateRating();
     }
 
-    public function incrementHelpful()
+    public function reject()
+    {
+        $this->update(['status' => 'rejected']);
+    }
+
+    public function markAsHelpful()
     {
         $this->increment('helpful_count');
+    }
+
+    public function addImages(array $images)
+    {
+        $this->images = array_merge($this->images ?? [], $images);
+        $this->save();
+    }
+
+    public function isApproved(): bool
+    {
+        return $this->status === 'approved';
     }
 }
