@@ -154,3 +154,50 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/returns/statistics', [ReturnController::class, 'statistics']);
     });
 });
+
+// Wishlist - Authenticated
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/wishlist', [\App\Http\Controllers\Api\WishlistController::class, 'index']);
+    Route::post('/wishlist', [\App\Http\Controllers\Api\WishlistController::class, 'add']);
+    Route::delete('/wishlist/{productId}', [\App\Http\Controllers\Api\WishlistController::class, 'remove']);
+    Route::get('/wishlist/check/{productId}', [\App\Http\Controllers\Api\WishlistController::class, 'check']);
+    Route::delete('/wishlist', [\App\Http\Controllers\Api\WishlistController::class, 'clear']);
+    Route::post('/wishlist/move-to-cart', [\App\Http\Controllers\Api\WishlistController::class, 'moveToCart']);
+});
+
+// Newsletter - Public
+Route::post('/newsletter/subscribe', [\App\Http\Controllers\Api\NewsletterController::class, 'subscribe']);
+Route::get('/newsletter/unsubscribe/{token}', [\App\Http\Controllers\Api\NewsletterController::class, 'unsubscribe']);
+Route::post('/newsletter/status', [\App\Http\Controllers\Api\NewsletterController::class, 'status']);
+
+// Product Recommendations - Public
+Route::get('/products/{id}/similar', function($id) {
+    $service = app(\App\Services\RecommendationService::class);
+    return response()->json($service->getSimilarProducts($id));
+});
+Route::get('/products/{id}/frequently-bought-together', function($id) {
+    $service = app(\App\Services\RecommendationService::class);
+    return response()->json($service->getFrequentlyBoughtTogether($id));
+});
+Route::get('/products/trending', function() {
+    $service = app(\App\Services\RecommendationService::class);
+    return response()->json($service->getTrendingProducts());
+});
+
+// Personalized Recommendations - Authenticated
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/recommendations', function() {
+        $service = app(\App\Services\RecommendationService::class);
+        return response()->json($service->getPersonalizedRecommendations(auth()->id()));
+    });
+});
+
+// Admin Dashboard - Admin only
+Route::middleware(['auth:sanctum', 'admin'])->prefix('admin')->group(function () {
+    Route::get('/dashboard', [\App\Http\Controllers\Api\Admin\DashboardController::class, 'index']);
+});
+
+// Vendor Dashboard - Vendor only
+Route::middleware(['auth:sanctum', 'vendor'])->prefix('vendor')->group(function () {
+    Route::get('/dashboard', [\App\Http\Controllers\Api\Vendor\DashboardController::class, 'index']);
+});

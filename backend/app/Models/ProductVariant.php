@@ -2,85 +2,74 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class ProductVariant extends Model
 {
-    use HasFactory;
-
     protected $fillable = [
         'product_id',
-        'name',
         'sku',
         'price',
-        'stock_quantity',
+        'compare_price',
+        'stock',
+        'barcode',
+        'weight',
         'attributes',
         'image',
-        'is_active',
+        'is_default',
     ];
 
-    protected function casts(): array
-    {
-        return [
-            'price' => 'decimal:2',
-            'stock_quantity' => 'integer',
-            'attributes' => 'array',
-            'is_active' => 'boolean',
-        ];
-    }
+    protected $casts = [
+        'attributes' => 'array',
+        'is_default' => 'boolean',
+        'price' => 'decimal:2',
+        'compare_price' => 'decimal:2',
+        'weight' => 'decimal:2',
+    ];
 
-    // Relations
-    public function product()
+    /**
+     * Get the product
+     */
+    public function product(): BelongsTo
     {
         return $this->belongsTo(Product::class);
     }
 
-    public function cartItems()
+    /**
+     * Get attribute labels
+     */
+    public function getAttributeLabelsAttribute(): array
     {
-        return $this->hasMany(CartItem::class);
-    }
-
-    public function orderItems()
-    {
-        return $this->hasMany(OrderItem::class);
-    }
-
-    // Scopes
-    public function scopeActive($query)
-    {
-        return $query->where('is_active', true);
-    }
-
-    public function scopeInStock($query)
-    {
-        return $query->where('stock_quantity', '>', 0);
-    }
-
-    // Helper methods
-    public function isInStock()
-    {
-        return $this->stock_quantity > 0;
-    }
-
-    public function decrementStock($quantity)
-    {
-        if ($this->stock_quantity >= $quantity) {
-            $this->decrement('stock_quantity', $quantity);
-            return true;
+        $labels = [];
+        
+        foreach ($this->attributes as $attributeId => $valueId) {
+            $value = AttributeValue::with('attribute')->find($valueId);
+            if ($value) {
+                $labels[$value->attribute->name] = $value->value;
+            }
         }
-        return false;
+
+        return $labels;
     }
 
-    public function incrementStock($quantity)
+    /**
+     * Check if variant is in stock
+     */
+    public function isInStock(): bool
     {
-        $this->increment('stock_quantity', $quantity);
+        return $this->stock > 0;
     }
 
-    public function getImageUrl()
+    /**
+     * Get discount percentage
+     */
+    public function getDiscountPercentageAttribute(): ?float
     {
-        return $this->image
-            ? asset('storage/' . $this->image)
-            : $this->product->primaryImage?->getFullImageUrl();
+        if ($this->compare_price && $this->compare_price > $this->price) {
+            return round((($this->compare_price - $this->price) / $this->compare_price) * 100, 2);
+        }
+
+        return null;
     }
 }

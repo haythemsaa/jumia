@@ -5,26 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class ShippingMethod extends Model
+class ShippingZone extends Model
 {
     protected $fillable = [
         'name',
-        'code',
         'description',
-        'carrier',
-        'base_cost',
-        'cost_per_kg',
-        'free_shipping_threshold',
-        'estimated_days_min',
-        'estimated_days_max',
+        'governorates',
         'is_active',
-        'sort_order',
     ];
 
     protected $casts = [
-        'base_cost' => 'decimal:2',
-        'cost_per_kg' => 'decimal:2',
-        'free_shipping_threshold' => 'decimal:2',
+        'governorates' => 'array',
         'is_active' => 'boolean',
     ];
 

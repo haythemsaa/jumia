@@ -5,26 +5,25 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Wishlist extends Model
+class NewsletterSubscription extends Model
 {
     protected $fillable = [
+        'email',
+        'name',
         'user_id',
-        'product_id',
+        'status',
+        'token',
+        'subscribed_at',
+        'unsubscribed_at',
     ];
 
-    /**
-     * Get the user
-     */
+    protected $casts = [
+        'subscribed_at' => 'datetime',
+        'unsubscribed_at' => 'datetime',
+    ];
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
-    }
-
-    /**
-     * Get the product
-     */
-    public function product(): BelongsTo
-    {
-        return $this->belongsTo(Product::class);
     }
 }
