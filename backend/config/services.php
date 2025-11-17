@@ -35,4 +35,22 @@ return [
         ],
     ],
 
+    'firebase' => [
+        'server_key' => env('FIREBASE_SERVER_KEY'),
+        'project_id' => env('FIREBASE_PROJECT_ID'),
+    ],
+
+    'sms' => [
+        'provider' => env('SMS_PROVIDER', 'tunisiesms'), // tunisiesms, smsapi
+
+        'tunisiesms' => [
+            'api_key' => env('TUNISIESMS_API_KEY'),
+            'sender_id' => env('TUNISIESMS_SENDER_ID', 'ICHRI'),
+        ],
+
+        'smsapi' => [
+            'api_key' => env('SMSAPI_API_KEY'),
+        ],
+    ],
+
 ];
