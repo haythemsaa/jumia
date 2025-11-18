@@ -1,0 +1,56 @@
+# Laravel
+/backend/node_modules
+/backend/public/hot
+/backend/public/storage
+/backend/storage/*.key
+/backend/vendor
+/backend/.env
+/backend/.env.backup
+/backend/.phpunit.result.cache
+/backend/Homestead.json
+/backend/Homestead.yaml
+/backend/npm-debug.log
+/backend/yarn-error.log
+
+# React Native
+/mobile/node_modules/
+/mobile/.expo/
+/mobile/dist/
+/mobile/npm-debug.*
+/mobile/*.jks
+/mobile/*.p8
+/mobile/*.p12
+/mobile/*.key
+/mobile/*.mobileprovision
+/mobile/*.orig.*
+/mobile/web-build/
+
+# Android
+/mobile/android/build/
+/mobile/android/app/build/
+/mobile/android/.gradle/
+
+# iOS
+/mobile/ios/Pods/
+/mobile/ios/build/
+/mobile/ios/*.xcworkspace
+
+# Frontend
+/frontend/node_modules
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Docker
+/docker/mysql/data

@@ -1,107 +1,103 @@
-# ICHRI Tunisia - Marketplace E-commerce
+# ICHRI Tunisia - E-Commerce Platform
 
-Plateforme e-commerce multi-vendeurs complète pour la Tunisie, construite avec Laravel 11, Next.js 14 et Flutter 3.
+🇹🇳 Plateforme e-commerce complète pour le marché tunisien avec backend Laravel, frontend Bootstrap 5 et application mobile React Native.
 
-> ⚠️ **Statut Actuel:** MVP Fonctionnel - En développement actif
->
-> 📊 **[Analyse Compétitive & Roadmap](COMPETITIVE_ANALYSIS.md)** | 🔧 **[Guide d'Implémentation](IMPLEMENTATION_GUIDE.md)** | ✅ **[TODO Technique](TODO.md)**
+## 📋 Table des Matières
 
-## 🚀 Vue d'ensemble
+- [Vue d'ensemble](#vue-densemble)
+- [Technologies](#technologies)
+- [Structure du Projet](#structure-du-projet)
+- [Installation](#installation)
+- [Déploiement](#déploiement)
+- [Fonctionnalités](#fonctionnalités)
+- [Documentation](#documentation)
+- [Licence](#licence)
 
-ICHRI Tunisia est un marketplace complet permettant aux vendeurs de vendre leurs produits et aux clients d'acheter en ligne avec livraison en Tunisie.
+## 🎯 Vue d'ensemble
 
-### 🎯 Vision & Positionnement
+ICHRI Tunisia est une solution e-commerce complète comprenant :
 
-**Objectif:** Devenir la plateforme e-commerce leader en Tunisie avec une expérience utilisateur supérieure à la concurrence.
+- **Backend API** : Laravel 11 avec architecture RESTful
+- **Frontend Web** : Application Bootstrap 5 moderne et responsive
+- **Application Mobile** : React Native pour iOS et Android
+- **Admin Panel** : Interface d'administration complète
+- **Vendor Dashboard** : Espace vendeur multi-marchés
 
-**Différenciation:**
-- 🇹🇳 **100% Tunisien** - Adapté au marché local
-- 💰 **Commission compétitive** - 12% (vs 15-20% concurrents)
-- ⚡ **Onboarding rapide** - Vendeurs approuvés en 24h
-- 🛡️ **Transparence totale** - Pas de frais cachés
-- 📱 **Multi-plateforme** - Web + iOS + Android
+## 🚀 Technologies
 
-### Technologies
-
-**Backend**
-- Laravel 11 (PHP 8.4+)
-- MySQL/PostgreSQL
+### Backend
+- Laravel 11.x (PHP 8.2+)
+- MySQL / PostgreSQL
+- Redis (Cache & Queues)
 - Laravel Sanctum (Authentication)
-- RESTful API
+- Laravel Scout (Search)
 
-**Frontend Web**
-- Next.js 14 (React)
-- TypeScript
-- Tailwind CSS
-- Zustand (State Management)
+### Frontend
+- Bootstrap 5.3.2
+- JavaScript ES6+
+- Swiper.js
+- AOS Animations
 
-**Application Mobile**
-- Flutter 3
-- Dart
-- Provider (State Management)
+### Mobile
+- React Native 0.72
+- React Navigation 6
+- Axios
+- AsyncStorage
 
-## 📁 Structure du projet
+### DevOps
+- Docker & Docker Compose
+- GitHub Actions (CI/CD)
+- Nginx
+- Supervisor (Queue Workers)
+
+## 📁 Structure du Projet
 
 ```
-ichri/
-├── backend/              # API Laravel 11
+ichri-tunisia/
+├── backend/                    # Laravel API
 │   ├── app/
+│   │   ├── Http/Controllers/
+│   │   ├── Models/
+│   │   ├── Services/
+│   │   └── ...
 │   ├── database/
-│   ├── routes/
-│   └── README.md
-├── frontend/            # Web Next.js 14
-│   ├── app/
-│   ├── components/
-│   ├── lib/
-│   └── README.md
-├── mobile/              # Application Flutter 3
-│   ├── lib/
-│   ├── android/
-│   ├── ios/
-│   └── README.md
-└── README.md           # Ce fichier
+│   │   ├── migrations/
+│   │   └── seeders/
+│   └── routes/
+├── frontend/                   # Bootstrap 5 Web App
+│   ├── index.html
+│   ├── css/
+│   ├── js/
+│   └── pages/
+├── mobile/                     # React Native App
+│   ├── src/
+│   │   ├── screens/
+│   │   ├── components/
+│   │   ├── navigation/
+│   │   └── services/
+│   └── package.json
+├── docker/                     # Docker configurations
+├── docs/                       # Documentation
+└── README.md
 ```
-
-## 🎨 Fonctionnalités
-
-### Pour les clients
-- ✅ Navigation et recherche de produits
-- ✅ Filtres avancés (catégories, prix, marques)
-- ✅ Panier d'achat
-- ✅ Gestion de commandes
-- ✅ Système de notation et avis
-- ✅ Programme de fidélité
-- ✅ Multiples méthodes de paiement
-- ✅ Suivi de livraison
-
-### Pour les vendeurs
-- ✅ Dashboard vendeur
-- ✅ Gestion de produits
-- ✅ Gestion de commandes
-- ✅ Statistiques de ventes
-- ✅ Système de commissions (12% par défaut)
-
-### Administration
-- ✅ Gestion des utilisateurs
-- ✅ Validation des vendeurs
-- ✅ Gestion des catégories
-- ✅ Gestion des méthodes de livraison
-- ✅ Système de coupons
 
 ## 🛠️ Installation
 
 ### Prérequis
-- PHP 8.4+
-- Composer
-- Node.js 18+
-- npm
-- MySQL/PostgreSQL
-- Flutter SDK 3+ (pour mobile)
 
-### Backend Laravel
+- PHP 8.2+
+- Composer
+- Node.js 16+
+- MySQL 8.0+
+- Redis
+- Docker (optionnel)
+
+### Installation Backend
 
 ```bash
-cd backend
+# Cloner le repository
+git clone https://github.com/haythemsaa/jumia.git
+cd jumia/backend
 
 # Installer les dépendances
 composer install
@@ -111,260 +107,239 @@ cp .env.example .env
 php artisan key:generate
 
 # Base de données
-php artisan migrate
-php artisan db:seed
+php artisan migrate --seed
 
 # Lancer le serveur
 php artisan serve
 ```
 
-API accessible sur http://localhost:8000
-
-### Frontend Next.js
+### Installation Frontend
 
 ```bash
 cd frontend
 
-# Installer les dépendances
-npm install
-
-# Configuration
-cp .env.local.example .env.local
-
-# Lancer le serveur
-npm run dev
+# Configurer l'API URL dans js/config.js
+# Ouvrir index.html dans un navigateur
+# Ou utiliser un serveur local
+python -m http.server 8080
 ```
 
-Application web accessible sur http://localhost:3000
-
-### Mobile Flutter
+### Installation Mobile
 
 ```bash
 cd mobile
 
 # Installer les dépendances
-flutter pub get
+npm install
 
-# Lancer sur émulateur/appareil
-flutter run
+# iOS
+cd ios && pod install && cd ..
+npm run ios
+
+# Android
+npm run android
 ```
 
-## 📊 Base de données
+## 🐳 Installation Docker
 
-Le projet utilise 19 tables principales:
-- users, vendors
-- products, product_images, product_variants, product_reviews
-- categories, brands
-- carts, cart_items
-- orders, order_items
-- payments, shipping_methods
-- addresses, coupons
-- loyalty_points, wishlists
+```bash
+# Cloner et démarrer
+git clone https://github.com/haythemsaa/jumia.git
+cd jumia
 
-## 🔐 Authentification
+# Lancer avec Docker Compose
+docker-compose up -d
 
-- Système basé sur Laravel Sanctum
-- Tokens API pour authentification
-- Rôles: client, vendor, admin
-- Protection des routes selon les rôles
-
-## 📡 API Endpoints
-
-### Authentification
-```
-POST   /api/register       # Inscription
-POST   /api/login          # Connexion
-POST   /api/logout         # Déconnexion
-GET    /api/user           # Utilisateur actuel
+# Migrations
+docker-compose exec app php artisan migrate --seed
 ```
 
-### Produits
+Accès :
+- API : http://localhost:8000
+- Frontend : http://localhost:8080
+- PhpMyAdmin : http://localhost:8081
+
+## ✨ Fonctionnalités
+
+### Pour les Clients
+- ✅ Navigation produits avec filtres avancés
+- ✅ Recherche intelligente
+- ✅ Panier persistant
+- ✅ Checkout multi-étapes
+- ✅ Méthodes de paiement tunisiennes (E-Dinar, Konnect, D17, Cash)
+- ✅ Suivi de commandes
+- ✅ Wishlist
+- ✅ Programme de fidélité (4 niveaux)
+- ✅ Avis et notes produits
+- ✅ Multi-langue (FR/AR/EN)
+
+### Pour les Vendeurs
+- ✅ Dashboard vendeur
+- ✅ Gestion produits
+- ✅ Gestion commandes
+- ✅ Statistiques ventes
+- ✅ Système de commissions
+- ✅ Payouts automatiques
+
+### Pour les Admins
+- ✅ Dashboard administrateur
+- ✅ Gestion utilisateurs
+- ✅ Gestion catégories
+- ✅ Gestion commandes globale
+- ✅ Statistiques avancées
+- ✅ Configuration système
+- ✅ Logs et monitoring
+
+### Technique
+- ✅ API REST complète (70+ endpoints)
+- ✅ Authentication JWT
+- ✅ Rate limiting
+- ✅ Caching Redis
+- ✅ Queue workers
+- ✅ Email notifications
+- ✅ Push notifications (mobile)
+- ✅ Image optimization
+- ✅ SEO friendly
+- ✅ Security best practices
+
+## 📊 Base de Données
+
+50+ tables incluant :
+- Users & Authentication
+- Products & Categories
+- Orders & Order Items
+- Cart & Wishlist
+- Reviews & Ratings
+- Payments & Transactions
+- Shipping Methods & Zones
+- Vendors & Commissions
+- Loyalty Program
+- Flash Sales
+- Coupons
+- Notifications
+
+## 🔐 Sécurité
+
+- CSRF Protection
+- XSS Prevention
+- SQL Injection Protection
+- Rate Limiting
+- JWT Authentication
+- Password Hashing (bcrypt)
+- HTTPS Enforced
+- Security Headers
+- Input Validation
+- API Throttling
+
+## 🌍 Internationalisation
+
+Support complet pour :
+- 🇫🇷 Français (défaut)
+- 🇹🇳 العربية (RTL)
+- 🇬🇧 English
+
+## 📱 Application Mobile
+
+### Fonctionnalités
+- Navigation intuitive (Bottom Tabs + Stack)
+- Catalogue produits avec recherche
+- Panier synchronisé
+- Checkout mobile-optimized
+- Profil utilisateur
+- Historique commandes
+- Push notifications
+- Mode offline (cart)
+
+### Plateformes
+- iOS (iPhone & iPad)
+- Android (Phone & Tablet)
+
+## 📚 Documentation
+
+- [Documentation Backend](./backend/README.md)
+- [Documentation Frontend](./frontend/README.md)
+- [Documentation Mobile](./mobile/README.md)
+- [API Documentation](./docs/API.md)
+- [Deployment Guide](./docs/DEPLOYMENT.md)
+
+## 🚀 Déploiement
+
+### Production Checklist
+
+**Backend**
+- [ ] Configurer .env production
+- [ ] Activer cache & optimizations
+- [ ] Configurer queue workers
+- [ ] Setup cron jobs
+- [ ] Configurer SSL
+- [ ] Activer monitoring
+
+**Frontend**
+- [ ] Minifier CSS/JS
+- [ ] Optimiser images
+- [ ] Configurer CDN
+- [ ] Setup caching headers
+- [ ] Activer HTTPS
+
+**Mobile**
+- [ ] Build signed APK/AAB
+- [ ] Build iOS IPA
+- [ ] Upload Google Play
+- [ ] Upload App Store
+- [ ] Configurer push notifications
+
+## 🧪 Tests
+
+```bash
+# Backend tests
+cd backend
+php artisan test
+
+# Frontend tests
+cd frontend
+npm test
+
+# Mobile tests
+cd mobile
+npm test
 ```
-GET    /api/products       # Liste des produits
-GET    /api/products/{id}  # Détails produit
-POST   /api/products       # Créer produit (vendeur)
-PUT    /api/products/{id}  # Modifier produit
-DELETE /api/products/{id}  # Supprimer produit
-```
 
-### Panier
-```
-GET    /api/cart           # Voir le panier
-POST   /api/cart           # Ajouter au panier
-PUT    /api/cart/{id}      # Modifier quantité
-DELETE /api/cart/{id}      # Retirer du panier
-```
+## 📈 Performance
 
-### Commandes
-```
-GET    /api/orders         # Liste des commandes
-POST   /api/orders         # Créer commande
-GET    /api/orders/{id}    # Détails commande
-POST   /api/orders/{id}/cancel # Annuler commande
-```
-
-Voir la documentation complète dans `/backend/README.md`
-
-## 🎨 Design
-
-### Couleurs principales
-- Orange ICHRI: `#FF9900`
-- Orange foncé: `#FF7700`
-- Gris: `#363636`
-
-### Responsive Design
-- ✅ Mobile-first
-- ✅ Tablette
-- ✅ Desktop
-
-## 🚢 Livraison
-
-4 méthodes de livraison en Tunisie:
-- Livraison Standard (7 TND, 3-7 jours)
-- Livraison Express (12 TND, 24-48h)
-- Poste Tunisienne (5 TND, 5-10 jours)
-- Aramex (15 TND, 2-5 jours)
-
-## 💳 Paiement
-
-**Actuellement (MVP):**
-- ⚠️ Paiement à la livraison
-- ⚠️ Carte bancaire (manuel)
-- ⚠️ Virement bancaire (manuel)
-
-**En développement (Sprint 1):**
-- 🚧 E-Dinar (Monétique Tunisie)
-- 🚧 Konnect Payment
-- 🚧 D17 Payment
-- 🚧 Split payment automatique
-
-## 📈 Roadmap & Développement
-
-### 🔴 Sprint 1 (Semaine 1-2) - **CRITIQUE**
-**Fonctionnalités bloquantes pour mise en production**
-- [ ] Intégration paiement en ligne (E-Dinar, Konnect, D17)
-- [ ] Système de notifications (Push + Email + SMS)
-- [ ] Système d'avis et reviews complet avec photos
-- [ ] Retours et remboursements
-- [ ] Factures PDF automatiques
-- [ ] Monitoring et logs (Sentry)
-- [ ] Backups automatiques quotidiens
-- [ ] CI/CD avec GitHub Actions
-
-**Impact:** Ces fonctionnalités sont **essentielles** pour être compétitif. Sans elles, la plateforme ne peut pas rivaliser avec Jumia ou Amazon.
-
-### 🟡 Sprint 2 (Semaine 3-4) - **IMPORTANT**
-**Amélioration expérience utilisateur**
-- [ ] Chat en temps réel (client-vendeur-support)
-- [ ] Suivi de livraison en temps réel avec GPS
-- [ ] Recherche avancée (Elasticsearch/Meilisearch)
-- [ ] Comparateur de produits
-- [ ] OAuth social login (Google, Facebook, Apple)
-- [ ] Optimisation images et CDN
-
-**Impact:** Augmente significativement la satisfaction client et les conversions.
-
-### 🟢 Sprint 3 (Semaine 5-6) - **CROISSANCE**
-**Engagement et rétention**
-- [ ] Programme fidélité avancé avec niveaux (Bronze→Platinum)
-- [ ] Flash sales et deals du jour
-- [ ] Recommandations personnalisées (Machine Learning)
-- [ ] Email marketing automatisé
-- [ ] Programme d'affiliation
-- [ ] Dashboard analytics avancé pour vendeurs
-
-**Impact:** Augmente la valeur vie client (LTV) et le taux de rétention.
-
-### 🔵 Sprint 4 (Semaine 7-8) - **OPTIMISATION**
-**Performance et scalabilité**
-- [ ] Multi-devises (EUR, USD, TND)
-- [ ] Multi-langues (Arabe RTL, Français, Anglais)
-- [ ] PWA (Progressive Web App)
-- [ ] SEO avancé et sitemap
-- [ ] Tests automatisés (Coverage >80%)
-- [ ] A/B Testing
-
-**Impact:** Expansion internationale et optimisation conversions.
-
-### 🚀 Phase Innovation (Mois 3+)
-**Différenciation concurrentielle**
-- [ ] Recherche par image (Visual Search)
-- [ ] Recherche vocale
-- [ ] AR pour essayage virtuel
-- [ ] Live Shopping / Streaming
-- [ ] Abonnement ICHRI Prime (livraison gratuite illimitée)
-- [ ] Blockchain pour traçabilité
-- [ ] Intelligence artificielle avancée
-
-**Impact:** Innovation et leadership technologique.
-
----
-
-## 📊 Gap Analysis vs Concurrents
-
-| Fonctionnalité | ICHRI (Actuel) | Jumia | Amazon | Priorité |
-|---|:---:|:---:|:---:|---|
-| Paiement en ligne | ⚠️ Manuel | ✅ | ✅ | 🔴 CRITIQUE |
-| Notifications temps réel | ❌ | ✅ | ✅ | 🔴 CRITIQUE |
-| Avis avec photos | ❌ | ✅ | ✅ | 🔴 CRITIQUE |
-| Retours en ligne | ❌ | ✅ | ✅ | 🔴 CRITIQUE |
-| Chat support | ❌ | ✅ | ✅ | 🟡 Important |
-| Tracking GPS | ❌ | ✅ | ✅ | 🟡 Important |
-| Recherche avancée | ⚠️ Basique | ✅ | ✅ | 🟡 Important |
-| Programme fidélité | ⚠️ Basique | ✅ | ✅ | 🟢 Moyen |
-| Multi-langues | ❌ | ✅ | ✅ | 🟢 Moyen |
-| Flash Sales | ❌ | ✅ | ✅ | 🟢 Moyen |
-
-**Diagnostic:**
-- ✅ **Forces:** Architecture solide, commission compétitive, focus local
-- ⚠️ **Faiblesses:** Manque fonctionnalités critiques de confiance
-- 🎯 **Objectif:** Atteindre 80% des fonctionnalités de Jumia en 2 mois
-
-➡️ **Voir [Analyse Compétitive Complète](COMPETITIVE_ANALYSIS.md) pour détails**
-
----
-
-## 💰 Investment & Resources
-
-**Budget estimé Phase 1-2 (2 mois):**
-- Développement: 28,000 TND
-- Infrastructure & Services: 2,600 TND
-- **Total:** ~30,600 TND
-
-**Retour sur investissement attendu:**
-- Augmentation conversions: +40%
-- Réduction abandon panier: -30%
-- Augmentation panier moyen: +25%
-- Amélioration NPS: +35 points
-
-➡️ **Voir [Guide d'Implémentation](IMPLEMENTATION_GUIDE.md) pour détails techniques**
-➡️ **Voir [TODO Technique](TODO.md) pour tâches détaillées**
-
-## 📄 Documentation
-
-- [Backend Documentation](backend/README.md)
-- [Frontend Documentation](frontend/README.md)
-- [Mobile Documentation](mobile/README.md)
-- [Specifications](Cahier_Specifications_Complet_Ecommerce_Tunisie.md)
+- Backend response time : < 200ms
+- Frontend load time : < 2s
+- Mobile app size : < 30MB
+- API rate limit : 60 req/min
+- Cache TTL : 5 minutes
 
 ## 🤝 Contribution
 
-Les contributions sont les bienvenues! Veuillez:
-1. Fork le projet
-2. Créer une branche feature
-3. Commit vos changements
-4. Push vers la branche
-5. Ouvrir une Pull Request
+Les contributions sont les bienvenues ! Voir [CONTRIBUTING.md](./CONTRIBUTING.md)
 
-## 📝 License
+## 📄 Licence
 
-MIT License - ICHRI Tunisia
+Ce projet est sous licence privée. Tous droits réservés.
 
-## 👥 Contact
+## 👥 Équipe
 
-- Email: support@ichri.tn
-- GitHub: https://github.com/haythemsaa/ichri
+- **Backend** : Laravel 11 API
+- **Frontend** : Bootstrap 5 Web App
+- **Mobile** : React Native iOS/Android
+- **DevOps** : Docker & CI/CD
+
+## 📞 Support
+
+Pour toute question ou support :
+- Email : support@ichri.tn
+- Documentation : https://docs.ichri.tn
+- Issues : https://github.com/haythemsaa/jumia/issues
+
+## 🎉 Remerciements
+
+Merci à tous les contributeurs et aux technologies open-source utilisées dans ce projet.
 
 ---
 
-Développé avec ❤️ pour la Tunisie
+**ICHRI Tunisia** - Votre marketplace tunisienne de confiance 🇹🇳
+
+Fait avec ❤️ en Tunisie
