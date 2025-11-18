@@ -1,72 +1,70 @@
-# ICHRI Tunisia - Frontend
+# ICHRI Tunisia - Frontend Documentation
 
-Frontend Next.js 14 pour la plateforme e-commerce multi-vendeurs ICHRI Tunisia.
+## Overview
 
-## 🚀 Technologies
+Modern, responsive e-commerce frontend built with Bootstrap 5 and vanilla JavaScript. Features elegant design, smooth animations, and complete integration with the Laravel backend API.
 
-- **Next.js 14** - Framework React avec App Router
-- **TypeScript** - Typage statique
-- **Tailwind CSS** - Framework CSS utility-first
-- **Zustand** - State management
-- **Axios** - Client HTTP
-- **React Hot Toast** - Notifications
-- **React Icons** - Bibliothèque d'icônes
+## 🚀 Features
 
-## 📁 Structure du projet
+### Core Functionality
+- **Homepage**: Hero slider, flash sales, trending products, categories
+- **Product Catalog**: Advanced filtering, sorting, pagination
+- **Product Details**: Image gallery, variants, reviews, related products
+- **Shopping Cart**: Real-time updates, coupon codes, price calculations
+- **Checkout**: Multi-step process with shipping and payment options
+- **Authentication**: Login, registration with social options
+- **User Dashboard**: Orders tracking, loyalty points, wishlist management
+
+### Technical Highlights
+- **Responsive Design**: Mobile-first approach, works on all devices
+- **Modern UI**: Bootstrap 5.3.2 with custom gradients and animations
+- **Multi-language**: Support for French, Arabic (RTL), and English
+- **API Integration**: Complete REST API client with 70+ methods
+- **Guest Support**: localStorage for cart/wishlist before login
+
+## 📁 Project Structure
 
 ```
 frontend/
-├── app/                   # Pages Next.js (App Router)
-│   ├── auth/             # Pages d'authentification
-│   ├── products/         # Pages produits
-│   ├── cart/             # Page panier
-│   └── page.tsx          # Page d'accueil
-├── components/           # Composants React
-│   └── layout/          # Header, Footer, Layout
-├── lib/                 # Bibliothèques et utilitaires
-│   ├── api/            # Services API
-│   └── stores/         # Stores Zustand
-└── types/              # Types TypeScript
+├── index.html                 # Homepage
+├── css/style.css             # Custom styles
+├── js/                       # JavaScript modules
+│   ├── config.js             # Configuration
+│   ├── api.js                # API client
+│   ├── main.js               # Core functionality
+│   └── ...                   # Page-specific JS
+└── pages/                    # HTML pages
+    ├── products.html
+    ├── product-detail.html
+    ├── cart.html
+    ├── checkout.html
+    ├── login.html
+    ├── register.html
+    └── dashboard.html
 ```
 
-## 🛠️ Installation
+## 🔧 Quick Start
 
-### Prérequis
-- Node.js 18+ et npm
-- Backend Laravel sur http://localhost:8000
+1. Open `index.html` in a browser
+2. Configure API URL in `js/config.js`
+3. Ensure backend API is running
 
-### Étapes
+## 📦 Technologies
 
-```bash
-# Installer les dépendances
-npm install
+- Bootstrap 5.3.2
+- Bootstrap Icons
+- Swiper.js (sliders)
+- AOS (animations)
+- Vanilla JavaScript (ES6+)
 
-# Configurer l'environnement
-cp .env.local.example .env.local
+## 🌍 Multi-language
 
-# Lancer le serveur
-npm run dev
-```
+Supports French, Arabic (RTL), and English via language switcher.
 
-Application accessible sur http://localhost:3000
+## 📱 Responsive
 
-## 📦 Scripts
+Mobile-first design with breakpoints for all device sizes.
 
-```bash
-npm run dev     # Serveur de développement
-npm run build   # Build de production
-npm start       # Serveur de production
-npm run lint    # Linter
-```
+---
 
-## 🎨 Fonctionnalités
-
-- ✅ Authentification (inscription, connexion)
-- ✅ Catalogue produits avec recherche et filtres
-- ✅ Panier d'achat
-- ✅ Gestion vendeur
-- ✅ Design responsive
-
-## 📄 License
-
-MIT License - ICHRI Tunisia
+Built with ❤️ for ICHRI Tunisia
