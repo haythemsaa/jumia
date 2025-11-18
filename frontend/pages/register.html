@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscription - ICHRI Tunisia</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body class="auth-page">
+    <!-- Header -->
+    <header class="auth-header py-3 border-bottom">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center">
+                <a href="../index.html" class="navbar-brand">
+                    <span class="brand-gradient">ICHRI</span>
+                </a>
+                <div>
+                    <select id="langSwitcher" class="form-select form-select-sm">
+                        <option value="fr">Français</option>
+                        <option value="ar">العربية</option>
+                        <option value="en">English</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Register Section -->
+    <section class="auth-section py-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-6 col-md-8">
+                    <div class="auth-card card shadow-lg border-0" data-aos="fade-up">
+                        <div class="card-body p-5">
+                            <!-- Logo -->
+                            <div class="text-center mb-4">
+                                <h2 class="brand-gradient">ICHRI Tunisia</h2>
+                                <p class="text-muted">Créez votre compte gratuitement</p>
+                            </div>
+
+                            <!-- Register Form -->
+                            <form id="registerForm">
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label for="firstName" class="form-label">Prénom *</label>
+                                        <input type="text" class="form-control" id="firstName" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="lastName" class="form-label">Nom *</label>
+                                        <input type="text" class="form-control" id="lastName" required>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <label for="email" class="form-label">Email *</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+                                            <input type="email" class="form-control" id="email" placeholder="votre@email.com" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <label for="phone" class="form-label">Téléphone *</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text"><i class="bi bi-phone"></i></span>
+                                            <input type="tel" class="form-control" id="phone" placeholder="+216 XX XXX XXX" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <label for="password" class="form-label">Mot de passe *</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text"><i class="bi bi-lock"></i></span>
+                                            <input type="password" class="form-control" id="password" placeholder="••••••••" required minlength="8">
+                                            <button class="btn btn-outline-secondary" type="button" onclick="togglePassword('password')">
+                                                <i class="bi bi-eye" id="toggleIconPassword"></i>
+                                            </button>
+                                        </div>
+                                        <small class="text-muted">Minimum 8 caractères</small>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <label for="passwordConfirmation" class="form-label">Confirmer le mot de passe *</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text"><i class="bi bi-lock-fill"></i></span>
+                                            <input type="password" class="form-control" id="passwordConfirmation" placeholder="••••••••" required minlength="8">
+                                            <button class="btn btn-outline-secondary" type="button" onclick="togglePassword('passwordConfirmation')">
+                                                <i class="bi bi-eye" id="toggleIconPasswordConfirmation"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <!-- Optional Fields -->
+                                    <div class="col-12">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="isVendor">
+                                            <label class="form-check-label" for="isVendor">
+                                                Je souhaite devenir vendeur
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <!-- Terms & Conditions -->
+                                    <div class="col-12">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="acceptTerms" required>
+                                            <label class="form-check-label" for="acceptTerms">
+                                                J'accepte les <a href="#" target="_blank">conditions d'utilisation</a> et la
+                                                <a href="#" target="_blank">politique de confidentialité</a>
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <button type="submit" class="btn btn-primary w-100 btn-lg">
+                                            <i class="bi bi-person-plus me-2"></i> S'inscrire
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+
+                            <!-- Divider -->
+                            <div class="text-center my-4">
+                                <span class="text-muted">ou s'inscrire avec</span>
+                            </div>
+
+                            <!-- Social Register -->
+                            <div class="d-grid gap-2">
+                                <button class="btn btn-outline-secondary" onclick="socialLogin('google')">
+                                    <i class="bi bi-google me-2"></i> Google
+                                </button>
+                                <button class="btn btn-outline-primary" onclick="socialLogin('facebook')">
+                                    <i class="bi bi-facebook me-2"></i> Facebook
+                                </button>
+                            </div>
+
+                            <!-- Login Link -->
+                            <div class="text-center mt-4">
+                                <p class="text-muted mb-0">
+                                    Vous avez déjà un compte ?
+                                    <a href="login.html" class="text-primary text-decoration-none fw-bold">
+                                        Se connecter
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Back to Home -->
+                    <div class="text-center mt-4">
+                        <a href="../index.html" class="text-muted text-decoration-none">
+                            <i class="bi bi-arrow-left me-2"></i> Retour à l'accueil
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- AOS JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- Config & Helpers -->
+    <script src="../js/config.js"></script>
+    <!-- API Client -->
+    <script src="../js/api.js"></script>
+    <!-- Auth JS -->
+    <script src="../js/auth.js"></script>
+
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true
+        });
+    </script>
+</body>
+</html>

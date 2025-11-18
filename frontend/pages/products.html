@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Produits - ICHRI Tunisia</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header id="header" class="header fixed-top">
+        <!-- Top Bar -->
+        <div class="top-bar bg-primary text-white py-2">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <small><i class="bi bi-telephone"></i> +216 XX XXX XXX</small>
+                        <small class="ms-3"><i class="bi bi-envelope"></i> contact@ichri.tn</small>
+                    </div>
+                    <div class="col-md-6 text-end">
+                        <div class="d-flex justify-content-end align-items-center gap-3">
+                            <select id="langSwitcher" class="form-select form-select-sm bg-transparent text-white border-white" style="width: auto;">
+                                <option value="fr">Français</option>
+                                <option value="ar">العربية</option>
+                                <option value="en">English</option>
+                            </select>
+                            <a href="login.html" class="text-white text-decoration-none" id="authLink">
+                                <i class="bi bi-person"></i> <span>Connexion</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Navigation -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+            <div class="container">
+                <a class="navbar-brand" href="../index.html">
+                    <span class="brand-gradient">ICHRI</span>
+                </a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarMain">
+                    <!-- Search Bar -->
+                    <form class="d-flex mx-auto search-form" style="max-width: 500px; width: 100%;" id="searchForm">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Rechercher des produits..." id="searchInput">
+                            <button class="btn btn-primary" type="submit">
+                                <i class="bi bi-search"></i>
+                            </button>
+                        </div>
+                    </form>
+
+                    <!-- Right Menu -->
+                    <ul class="navbar-nav ms-auto align-items-center">
+                        <li class="nav-item dropdown me-3">
+                            <a class="nav-link position-relative" href="wishlist.html">
+                                <i class="bi bi-heart fs-4"></i>
+                                <span class="badge bg-danger position-absolute top-0 start-100 translate-middle" id="wishlistCount">0</span>
+                            </a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link position-relative" href="cart.html">
+                                <i class="bi bi-cart3 fs-4"></i>
+                                <span class="badge bg-primary position-absolute top-0 start-100 translate-middle" id="cartCount">0</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Categories Navigation -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light border-top border-bottom">
+            <div class="container">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCategories">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCategories">
+                    <ul class="navbar-nav" id="categoriesNav">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="products.html">Tous les produits</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Breadcrumb -->
+    <section class="breadcrumb-section py-3 bg-light" style="margin-top: 160px;">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-0">
+                    <li class="breadcrumb-item"><a href="../index.html">Accueil</a></li>
+                    <li class="breadcrumb-item active" aria-current="page" id="breadcrumbTitle">Produits</li>
+                </ol>
+            </nav>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products-section py-5">
+        <div class="container">
+            <div class="row">
+                <!-- Filters Sidebar -->
+                <div class="col-lg-3">
+                    <div class="filters-sidebar">
+                        <!-- Mobile Filter Toggle -->
+                        <div class="d-lg-none mb-3">
+                            <button class="btn btn-outline-primary w-100" type="button" data-bs-toggle="collapse" data-bs-target="#filtersCollapse">
+                                <i class="bi bi-funnel"></i> Filtres
+                            </button>
+                        </div>
+
+                        <div class="collapse d-lg-block" id="filtersCollapse">
+                            <!-- Categories Filter -->
+                            <div class="filter-group mb-4">
+                                <h5 class="filter-title">Catégories</h5>
+                                <div id="categoriesFilter">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="category" id="catAll" value="" checked>
+                                        <label class="form-check-label" for="catAll">
+                                            Toutes les catégories
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Price Range Filter -->
+                            <div class="filter-group mb-4">
+                                <h5 class="filter-title">Prix (TND)</h5>
+                                <div class="row g-2">
+                                    <div class="col-6">
+                                        <input type="number" class="form-control" id="minPrice" placeholder="Min" min="0">
+                                    </div>
+                                    <div class="col-6">
+                                        <input type="number" class="form-control" id="maxPrice" placeholder="Max" min="0">
+                                    </div>
+                                </div>
+                                <button class="btn btn-sm btn-primary w-100 mt-2" onclick="applyPriceFilter()">Appliquer</button>
+                            </div>
+
+                            <!-- Rating Filter -->
+                            <div class="filter-group mb-4">
+                                <h5 class="filter-title">Note</h5>
+                                <div class="rating-filters">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="rating" id="rating5" value="5">
+                                        <label class="form-check-label" for="rating5">
+                                            <i class="bi bi-star-fill text-warning"></i>
+                                            <i class="bi bi-star-fill text-warning"></i>
+                                            <i class="bi bi-star-fill text-warning"></i>
+                                            <i class="bi bi-star-fill text-warning"></i>
+                                            <i class="bi bi-star-fill text-warning"></i>
+                                            <span class="ms-2">5 étoiles</span>
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="rating" id="rating4" value="4">
+                                        <label class="form-check-label" for="rating4">
+                                            <i class="bi bi-star-fill text-warning"></i>
+                                            <i class="bi bi-star-fill text-warning"></i>
+                                            <i class="bi bi-star-fill text-warning"></i>
+                                            <i class="bi bi-star-fill text-warning"></i>
+                                            <i class="bi bi-star text-warning"></i>
+                                            <span class="ms-2">4+ étoiles</span>
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="rating" id="rating3" value="3">
+                                        <label class="form-check-label" for="rating3">
+                                            <i class="bi bi-star-fill text-warning"></i>
+                                            <i class="bi bi-star-fill text-warning"></i>
+                                            <i class="bi bi-star-fill text-warning"></i>
+                                            <i class="bi bi-star text-warning"></i>
+                                            <i class="bi bi-star text-warning"></i>
+                                            <span class="ms-2">3+ étoiles</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Availability Filter -->
+                            <div class="filter-group mb-4">
+                                <h5 class="filter-title">Disponibilité</h5>
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="inStockOnly">
+                                    <label class="form-check-label" for="inStockOnly">
+                                        En stock uniquement
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Discount Filter -->
+                            <div class="filter-group mb-4">
+                                <h5 class="filter-title">Réductions</h5>
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="onSaleOnly">
+                                    <label class="form-check-label" for="onSaleOnly">
+                                        En promotion uniquement
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Clear Filters -->
+                            <button class="btn btn-outline-secondary w-100" onclick="clearFilters()">
+                                <i class="bi bi-x-circle"></i> Réinitialiser les filtres
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Products Grid -->
+                <div class="col-lg-9">
+                    <!-- Toolbar -->
+                    <div class="products-toolbar d-flex justify-content-between align-items-center mb-4 p-3 bg-light rounded">
+                        <div class="results-count">
+                            <span id="resultsCount">0 produits</span>
+                        </div>
+                        <div class="d-flex align-items-center gap-3">
+                            <label for="sortBy" class="mb-0">Trier par:</label>
+                            <select id="sortBy" class="form-select" style="width: auto;">
+                                <option value="newest">Les plus récents</option>
+                                <option value="price_asc">Prix: croissant</option>
+                                <option value="price_desc">Prix: décroissant</option>
+                                <option value="name_asc">Nom: A-Z</option>
+                                <option value="name_desc">Nom: Z-A</option>
+                                <option value="popular">Les plus populaires</option>
+                                <option value="rating">Meilleures notes</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Products Grid -->
+                    <div class="row g-4" id="productsGrid">
+                        <!-- Products will be loaded here -->
+                    </div>
+
+                    <!-- Pagination -->
+                    <nav aria-label="Products pagination" class="mt-5">
+                        <ul class="pagination justify-content-center" id="pagination">
+                            <!-- Pagination will be loaded here -->
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer bg-dark text-white pt-5">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="brand-gradient mb-3">ICHRI Tunisia</h5>
+                    <p class="text-muted">Votre marketplace tunisienne de confiance pour tous vos achats en ligne.</p>
+                    <div class="social-links mt-3">
+                        <a href="#" class="text-white me-3"><i class="bi bi-facebook fs-4"></i></a>
+                        <a href="#" class="text-white me-3"><i class="bi bi-instagram fs-4"></i></a>
+                        <a href="#" class="text-white me-3"><i class="bi bi-twitter fs-4"></i></a>
+                        <a href="#" class="text-white"><i class="bi bi-linkedin fs-4"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <h6 class="mb-3">Navigation</h6>
+                    <ul class="list-unstyled footer-links">
+                        <li><a href="../index.html">Accueil</a></li>
+                        <li><a href="products.html">Produits</a></li>
+                        <li><a href="#">À propos</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <h6 class="mb-3">Compte</h6>
+                    <ul class="list-unstyled footer-links">
+                        <li><a href="profile.html">Mon compte</a></li>
+                        <li><a href="orders.html">Mes commandes</a></li>
+                        <li><a href="wishlist.html">Mes favoris</a></li>
+                        <li><a href="cart.html">Mon panier</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <h6 class="mb-3">Support</h6>
+                    <ul class="list-unstyled footer-links">
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Livraison</a></li>
+                        <li><a href="#">Retours</a></li>
+                        <li><a href="#">Conditions</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h6 class="mb-3">Moyens de paiement</h6>
+                    <div class="payment-methods">
+                        <img src="../images/payment-methods.png" alt="Payment Methods" class="img-fluid" style="max-height: 40px;">
+                    </div>
+                    <div class="mt-3">
+                        <p class="text-muted small mb-1">Application mobile</p>
+                        <a href="#" class="d-inline-block me-2">
+                            <img src="../images/app-store.png" alt="App Store" style="height: 40px;">
+                        </a>
+                        <a href="#" class="d-inline-block">
+                            <img src="../images/google-play.png" alt="Google Play" style="height: 40px;">
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-4 bg-secondary">
+            <div class="row">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="text-muted mb-0">&copy; 2024 ICHRI Tunisia. Tous droits réservés.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <a href="#" class="text-muted text-decoration-none me-3">Politique de confidentialité</a>
+                    <a href="#" class="text-muted text-decoration-none">Conditions d'utilisation</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="backToTop" class="btn btn-primary back-to-top">
+        <i class="bi bi-arrow-up"></i>
+    </button>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- AOS JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- Config & Helpers -->
+    <script src="../js/config.js"></script>
+    <!-- API Client -->
+    <script src="../js/api.js"></script>
+    <!-- Main JS -->
+    <script src="../js/main.js"></script>
+    <!-- Products Page JS -->
+    <script src="../js/products.js"></script>
+</body>
+</html>
